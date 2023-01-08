@@ -1,0 +1,44 @@
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'flutter_flow/lat_lng.dart';
+
+class FFAppState extends ChangeNotifier {
+  static final FFAppState _instance = FFAppState._internal();
+
+  factory FFAppState() {
+    return _instance;
+  }
+
+  FFAppState._internal() {
+    initializePersistedState();
+  }
+
+  Future initializePersistedState() async {
+    prefs = await SharedPreferences.getInstance();
+    _language = prefs.getString('ff_language') ?? _language;
+  }
+
+  void update(VoidCallback callback) {
+    callback();
+    notifyListeners();
+  }
+
+  late SharedPreferences prefs;
+
+  String _language = 'Hindi';
+  String get language => _language;
+  set language(String _value) {
+    _language = _value;
+    prefs.setString('ff_language', _value);
+  }
+}
+
+LatLng? _latLngFromString(String? val) {
+  if (val == null) {
+    return null;
+  }
+  final split = val.split(',');
+  final lat = double.parse(split.first);
+  final lng = double.parse(split.last);
+  return LatLng(lat, lng);
+}

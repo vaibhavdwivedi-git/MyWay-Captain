@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "1044695493341",
+    "project_id": "mywaydhaba",
+    "storage_bucket": "mywaydhaba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1044695493341:android:fc079bc85aade450860934",
+        "android_client_info": {
+          "package_name": "com.mywaydhaba.myway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1044695493341-s8lot9r6agqf0n5tgimftabk5nb6pmdi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mywaydhaba.myway",
+            "certificate_hash": "efa1d5ebca1573f6c53725138939e93a7614bce0"
+          }
+        },
+        {
+          "client_id": "1044695493341-vrrpbs1fae6338c30nu9q2bd4b7e87fo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mywaydhaba.myway",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "1044695493341-jauiolpemndb17r0vfcqqkvfn0e6khe0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRpO-vlesieea4o0HtI2Qe8VCUOwbPQOk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1044695493341-jauiolpemndb17r0vfcqqkvfn0e6khe0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1044695493341-rjm43vb69nsv529eff04lmf0tl3fv458.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mywaydhaba.myway"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
