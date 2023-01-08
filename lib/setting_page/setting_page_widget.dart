@@ -32,7 +32,7 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
     context.watch<FFAppState>();
 
     return AuthUserStreamWidget(
-      child: StreamBuilder<List<DriversRecord>>(
+      builder: (context) => StreamBuilder<List<DriversRecord>>(
         stream: queryDriversRecord(
           queryBuilder: (driversRecord) => driversRecord.where('MobileNumber',
               isEqualTo: currentPhoneNumber),
@@ -295,7 +295,7 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                           flex: 4,
                           child: Container(
                             width: 100,
-                            height: 56,
+                            height: 60,
                             decoration: BoxDecoration(
                               color: Color(0xFFF2F7FA),
                               borderRadius: BorderRadius.only(
@@ -313,13 +313,13 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   AutoSizeText(
-                                    'https://play.google.com/store/apps/details?id=com.amazon.mp3',
+                                    'https://play.google.com/store/apps/details?id=com.mywaydhaba.myway',
                                     style: FlutterFlowTheme.of(context)
                                         .bodyText1
                                         .override(
                                           fontFamily: 'Poppins',
                                           color: Color(0xFF1EA5B2),
-                                          fontSize: 8,
+                                          fontSize: 6,
                                         ),
                                   ),
                                 ],
@@ -335,11 +335,11 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                                   'SETTING_Container_hrscu69n_ON_TAP');
                               logFirebaseEvent('Container_share');
                               await Share.share(
-                                  'नमस्ते मित्र! मैं MyWay ढाबा से जुड़ चुका हूं,  तुम भी इससे जुड़ सकते हो, इस app ko install krne se।');
+                                  'नमस्ते मित्र! मैं MyWay ढाबा से जुड़ चुका हूं,  तुम भी इससे जुड़ सकते हो, इस app ko install krne se।  https://play.google.com/store/apps/details?id=com.mywaydhaba.myway');
                             },
                             child: Container(
                               width: 100,
-                              height: 56,
+                              height: 60,
                               decoration: BoxDecoration(
                                 color: Color(0xFF7ED6DC),
                                 borderRadius: BorderRadius.only(

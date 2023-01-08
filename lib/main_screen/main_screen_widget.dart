@@ -30,7 +30,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
     context.watch<FFAppState>();
 
     return AuthUserStreamWidget(
-      child: StreamBuilder<List<DriversRecord>>(
+      builder: (context) => StreamBuilder<List<DriversRecord>>(
         stream: queryDriversRecord(
           queryBuilder: (driversRecord) => driversRecord.where('MobileNumber',
               isEqualTo: currentPhoneNumber),
@@ -159,7 +159,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                                       MediaQuery.of(context).size.height * 0.2,
                                   decoration: BoxDecoration(
                                     color: Color(0xFFF45D5C),
-                                    borderRadius: BorderRadius.circular(40),
+                                    borderRadius: BorderRadius.circular(24),
                                   ),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -230,7 +230,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                                       MediaQuery.of(context).size.height * 0.2,
                                   decoration: BoxDecoration(
                                     color: Color(0xFF75B9F2),
-                                    borderRadius: BorderRadius.circular(40),
+                                    borderRadius: BorderRadius.circular(32),
                                   ),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
@@ -355,7 +355,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                                           decoration: BoxDecoration(
                                             color: Color(0xFF40C88E),
                                             borderRadius:
-                                                BorderRadius.circular(40),
+                                                BorderRadius.circular(32),
                                           ),
                                           child: Padding(
                                             padding:
