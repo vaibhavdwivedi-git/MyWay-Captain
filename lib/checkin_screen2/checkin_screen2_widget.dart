@@ -1,12 +1,10 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../flutter_flow/upload_media.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -45,13 +43,9 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
       ],
     ),
   };
-  bool isMediaUploading = false;
-  String uploadedFileUrl = '';
-
-  TextEditingController? textController;
-  double? ratingBarValue;
   LatLng? currentUserLocationValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  double? ratingBarValue;
 
   @override
   void initState() {
@@ -61,13 +55,6 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
         .then((loc) => setState(() => currentUserLocationValue = loc));
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'CheckinScreen2'});
-    textController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    textController?.dispose();
-    super.dispose();
   }
 
   @override
@@ -361,405 +348,6 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
                           children: [
                             Text(
                               FFAppState().language == 'English'
-                                  ? 'Order Details'
-                                  : 'ऑर्डर का विवरण',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyText1
-                                  .override(
-                                    fontFamily: 'Poppins',
-                                    fontSize: 16,
-                                  ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 8),
-                              child: TextFormField(
-                                controller: textController,
-                                autofocus: true,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Poppins',
-                                        fontSize: 16,
-                                      ),
-                                  hintText: FFAppState().language == 'English'
-                                      ? 'Enter bill amount'
-                                      : 'बिल राशि दर्ज करें',
-                                  hintStyle: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'Work Sans',
-                                        color: Color(0xFF65CED6),
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                  enabledBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  focusedBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  errorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  focusedErrorBorder: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  filled: true,
-                                  fillColor: Color(0xFFF2F7FA),
-                                  contentPadding:
-                                      EdgeInsetsDirectional.fromSTEB(
-                                          16, 8, 16, 8),
-                                ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText1
-                                    .override(
-                                      fontFamily: 'Poppins',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                keyboardType: TextInputType.number,
-                              ),
-                            ),
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 0, 36),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 8, 0, 0),
-                                          child: FFButtonWidget(
-                                            onPressed: functions.getDistance(
-                                                        currentUserLocationValue,
-                                                        checkinScreen2OutletsRecord!
-                                                            .geoLocation) ==
-                                                    false
-                                                ? null
-                                                : () async {
-                                                    logFirebaseEvent(
-                                                        'CHECKIN_SCREEN2_रसीद_जमा_करें_BTN_ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Button_wait__delay');
-                                                    await Future.delayed(
-                                                        const Duration(
-                                                            milliseconds: 1));
-                                                    if (textController!.text ==
-                                                        '') {
-                                                      logFirebaseEvent(
-                                                          'Button_show_snack_bar');
-                                                      ScaffoldMessenger.of(
-                                                              context)
-                                                          .showSnackBar(
-                                                        SnackBar(
-                                                          content: Text(
-                                                            'Mandatory to fill bill amount.',
-                                                            style: TextStyle(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .white,
-                                                              fontSize: 14,
-                                                            ),
-                                                          ),
-                                                          duration: Duration(
-                                                              milliseconds:
-                                                                  2000),
-                                                          backgroundColor:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .customColor3,
-                                                        ),
-                                                      );
-                                                    } else {
-                                                      logFirebaseEvent(
-                                                          'Button_upload_media_to_firebase');
-                                                      final selectedMedia =
-                                                          await selectMedia(
-                                                        multiImage: false,
-                                                      );
-                                                      if (selectedMedia !=
-                                                              null &&
-                                                          selectedMedia.every((m) =>
-                                                              validateFileFormat(
-                                                                  m.storagePath,
-                                                                  context))) {
-                                                        setState(() =>
-                                                            isMediaUploading =
-                                                                true);
-                                                        var downloadUrls =
-                                                            <String>[];
-                                                        try {
-                                                          showUploadMessage(
-                                                            context,
-                                                            'Uploading file...',
-                                                            showLoading: true,
-                                                          );
-                                                          downloadUrls =
-                                                              (await Future
-                                                                      .wait(
-                                                            selectedMedia.map(
-                                                              (m) async =>
-                                                                  await uploadData(
-                                                                      m.storagePath,
-                                                                      m.bytes),
-                                                            ),
-                                                          ))
-                                                                  .where((u) =>
-                                                                      u != null)
-                                                                  .map(
-                                                                      (u) => u!)
-                                                                  .toList();
-                                                        } finally {
-                                                          ScaffoldMessenger.of(
-                                                                  context)
-                                                              .hideCurrentSnackBar();
-                                                          isMediaUploading =
-                                                              false;
-                                                        }
-                                                        if (downloadUrls
-                                                                .length ==
-                                                            selectedMedia
-                                                                .length) {
-                                                          setState(() =>
-                                                              uploadedFileUrl =
-                                                                  downloadUrls
-                                                                      .first);
-                                                          showUploadMessage(
-                                                              context,
-                                                              'Success!');
-                                                        } else {
-                                                          setState(() {});
-                                                          showUploadMessage(
-                                                              context,
-                                                              'Failed to upload media');
-                                                          return;
-                                                        }
-                                                      }
-                                                    }
-                                                  },
-                                            text: FFAppState().language ==
-                                                    'English'
-                                                ? 'Add Reciept'
-                                                : 'रसीद जमा करें',
-                                            options: FFButtonOptions(
-                                              width: double.infinity,
-                                              height: 40,
-                                              color: Color(0xFF7ED6DC),
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .subtitle2
-                                                      .override(
-                                                        fontFamily: 'Poppins',
-                                                        color:
-                                                            Color(0xFF3F4141),
-                                                        fontSize: 14,
-                                                      ),
-                                              elevation: 0,
-                                              borderSide: BorderSide(
-                                                color: Colors.transparent,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              disabledColor: Color(0xFFF2F7FA),
-                                            ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 8, 0, 0),
-                                          child: AuthUserStreamWidget(
-                                            builder: (context) => StreamBuilder<
-                                                List<DriversRecord>>(
-                                              stream: queryDriversRecord(
-                                                queryBuilder: (driversRecord) =>
-                                                    driversRecord.where(
-                                                        'MobileNumber',
-                                                        isEqualTo:
-                                                            currentPhoneNumber),
-                                                singleRecord: true,
-                                              ),
-                                              builder: (context, snapshot) {
-                                                // Customize what your widget looks like when it's loading.
-                                                if (!snapshot.hasData) {
-                                                  return Center(
-                                                    child: SizedBox(
-                                                      width: 50,
-                                                      height: 50,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryColor,
-                                                      ),
-                                                    ),
-                                                  );
-                                                }
-                                                List<DriversRecord>
-                                                    buttonDriversRecordList =
-                                                    snapshot.data!;
-                                                final buttonDriversRecord =
-                                                    buttonDriversRecordList
-                                                            .isNotEmpty
-                                                        ? buttonDriversRecordList
-                                                            .first
-                                                        : null;
-                                                return FFButtonWidget(
-                                                  onPressed: uploadedFileUrl ==
-                                                          ''
-                                                      ? null
-                                                      : () async {
-                                                          logFirebaseEvent(
-                                                              'CHECKIN_SCREEN2_PAGE_SUBMIT_BTN_ON_TAP');
-                                                          logFirebaseEvent(
-                                                              'Button_backend_call');
-
-                                                          final transactionsCreateData =
-                                                              createTransactionsRecordData(
-                                                            bill: int.tryParse(
-                                                                textController!
-                                                                    .text),
-                                                            date:
-                                                                getCurrentTimestamp,
-                                                            outlet:
-                                                                checkinScreen2OutletsRecord!
-                                                                    .name,
-                                                            driver:
-                                                                buttonDriversRecord!
-                                                                    .name,
-                                                            verified: false,
-                                                            photo:
-                                                                uploadedFileUrl,
-                                                          );
-                                                          await TransactionsRecord
-                                                              .collection
-                                                              .doc()
-                                                              .set(
-                                                                  transactionsCreateData);
-                                                          logFirebaseEvent(
-                                                              'Button_backend_call');
-
-                                                          final outletsUpdateData =
-                                                              {
-                                                            ...createOutletsRecordData(
-                                                              rating: 4,
-                                                            ),
-                                                            'Revenue': FieldValue
-                                                                .increment(int.parse(
-                                                                    textController!
-                                                                        .text)),
-                                                            'Visits': FieldValue
-                                                                .increment(1),
-                                                          };
-                                                          await checkinScreen2OutletsRecord!
-                                                              .reference
-                                                              .update(
-                                                                  outletsUpdateData);
-                                                          logFirebaseEvent(
-                                                              'Button_navigate_to');
-
-                                                          context.pushNamed(
-                                                            'ThankyouScreen',
-                                                            extra: <String,
-                                                                dynamic>{
-                                                              kTransitionInfoKey:
-                                                                  TransitionInfo(
-                                                                hasTransition:
-                                                                    true,
-                                                                transitionType:
-                                                                    PageTransitionType
-                                                                        .bottomToTop,
-                                                              ),
-                                                            },
-                                                          );
-
-                                                          logFirebaseEvent(
-                                                              'Button_backend_call');
-
-                                                          final driversUpdateData =
-                                                              {
-                                                            'MoneySpent': FieldValue
-                                                                .increment(int.parse(
-                                                                    textController!
-                                                                        .text)),
-                                                            'Trips': FieldValue
-                                                                .increment(1),
-                                                            'Bills': FieldValue
-                                                                .arrayUnion([
-                                                              uploadedFileUrl
-                                                            ]),
-                                                          };
-                                                          await buttonDriversRecord!
-                                                              .reference
-                                                              .update(
-                                                                  driversUpdateData);
-                                                        },
-                                                  text: 'Submit',
-                                                  options: FFButtonOptions(
-                                                    width: double.infinity,
-                                                    height: 40,
-                                                    color: Color(0xFF7ED6DC),
-                                                    textStyle: FlutterFlowTheme
-                                                            .of(context)
-                                                        .subtitle2
-                                                        .override(
-                                                          fontFamily: 'Poppins',
-                                                          color:
-                                                              Color(0xFF3F4141),
-                                                          fontSize: 14,
-                                                        ),
-                                                    elevation: 0,
-                                                    borderSide: BorderSide(
-                                                      color: Colors.transparent,
-                                                    ),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8),
-                                                    disabledColor:
-                                                        Color(0xFFF2F7FA),
-                                                  ),
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Text(
-                              FFAppState().language == 'English'
                                   ? 'Give your feedback'
                                   : 'खाने का फीडबैक दें',
                               style: FlutterFlowTheme.of(context)
@@ -771,7 +359,7 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -787,11 +375,173 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
                                     initialRating: ratingBarValue ??= 3,
                                     unratedColor: Color(0xFFF2F7FA),
                                     itemCount: 5,
-                                    itemSize: 28,
+                                    itemSize: 32,
                                     glowColor: Color(0xFFFFA2C0),
                                   ),
                                 ],
                               ),
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 32, 0, 0),
+                                        child: AuthUserStreamWidget(
+                                          builder: (context) => StreamBuilder<
+                                              List<DriversRecord>>(
+                                            stream: queryDriversRecord(
+                                              queryBuilder: (driversRecord) =>
+                                                  driversRecord.where(
+                                                      'MobileNumber',
+                                                      isEqualTo:
+                                                          currentPhoneNumber),
+                                              singleRecord: true,
+                                            ),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 50,
+                                                    height: 50,
+                                                    child:
+                                                        CircularProgressIndicator(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .primaryColor,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              List<DriversRecord>
+                                                  buttonDriversRecordList =
+                                                  snapshot.data!;
+                                              final buttonDriversRecord =
+                                                  buttonDriversRecordList
+                                                          .isNotEmpty
+                                                      ? buttonDriversRecordList
+                                                          .first
+                                                      : null;
+                                              return FFButtonWidget(
+                                                onPressed: functions.getDistance(
+                                                            currentUserLocationValue,
+                                                            checkinScreen2OutletsRecord!
+                                                                .geoLocation) ==
+                                                        false
+                                                    ? null
+                                                    : () async {
+                                                        logFirebaseEvent(
+                                                            'CHECKIN_SCREEN2_PAGE_SUBMIT_BTN_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Button_backend_call');
+
+                                                        final transactionsCreateData =
+                                                            createTransactionsRecordData(
+                                                          date:
+                                                              getCurrentTimestamp,
+                                                          outlet:
+                                                              checkinScreen2OutletsRecord!
+                                                                  .name,
+                                                          driver:
+                                                              buttonDriversRecord!
+                                                                  .name,
+                                                          verified: false,
+                                                        );
+                                                        await TransactionsRecord
+                                                            .collection
+                                                            .doc()
+                                                            .set(
+                                                                transactionsCreateData);
+                                                        logFirebaseEvent(
+                                                            'Button_backend_call');
+
+                                                        final outletsUpdateData =
+                                                            {
+                                                          ...createOutletsRecordData(
+                                                            rating: 4,
+                                                          ),
+                                                          'Visits': FieldValue
+                                                              .increment(1),
+                                                        };
+                                                        await checkinScreen2OutletsRecord!
+                                                            .reference
+                                                            .update(
+                                                                outletsUpdateData);
+                                                        logFirebaseEvent(
+                                                            'Button_navigate_to');
+
+                                                        context.pushNamed(
+                                                          'ThankyouScreen',
+                                                          extra: <String,
+                                                              dynamic>{
+                                                            kTransitionInfoKey:
+                                                                TransitionInfo(
+                                                              hasTransition:
+                                                                  true,
+                                                              transitionType:
+                                                                  PageTransitionType
+                                                                      .bottomToTop,
+                                                            ),
+                                                          },
+                                                        );
+
+                                                        logFirebaseEvent(
+                                                            'Button_backend_call');
+
+                                                        final driversUpdateData =
+                                                            {
+                                                          'Trips': FieldValue
+                                                              .increment(1),
+                                                        };
+                                                        await buttonDriversRecord!
+                                                            .reference
+                                                            .update(
+                                                                driversUpdateData);
+                                                      },
+                                                text: FFAppState().language ==
+                                                        'English'
+                                                    ? 'Mark your entry'
+                                                    : 'अपनी उपस्थी दर्ज करवाएं',
+                                                options: FFButtonOptions(
+                                                  width: double.infinity,
+                                                  height: 60,
+                                                  color: Color(0xFF7ED6DC),
+                                                  textStyle: FlutterFlowTheme
+                                                          .of(context)
+                                                      .subtitle2
+                                                      .override(
+                                                        fontFamily: 'Poppins',
+                                                        color:
+                                                            Color(0xFF3F4141),
+                                                        fontSize: 14,
+                                                      ),
+                                                  elevation: 0,
+                                                  borderSide: BorderSide(
+                                                    color: Colors.transparent,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  disabledColor:
+                                                      Color(0xFFF2F7FA),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                             if (functions.getDistance(currentUserLocationValue,
                                     checkinScreen2OutletsRecord!.geoLocation) ==
@@ -827,8 +577,8 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
                                               child: AutoSizeText(
                                                 FFAppState().language ==
                                                         'English'
-                                                    ? 'Need to be within 100m range of outlet to fill this form.'
-                                                    : 'इस फॉर्म को भरने के लिए आपको ढाबे से 100 मीटर के दायरे में होना चाहिए',
+                                                    ? 'Need to be within 100m range of outlet to mark your entry.'
+                                                    : 'अपनी उपस्थी दर्ज करवाने के लिए आपको ढाबे से 100 मीटर के दायरे में होना चाहिए',
                                                 textAlign: TextAlign.center,
                                                 style:
                                                     FlutterFlowTheme.of(context)

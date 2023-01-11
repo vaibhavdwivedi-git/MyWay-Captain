@@ -110,6 +110,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               ),
             ),
             FFRoute(
+              name: 'JoiningRewardScreen',
+              path: 'joiningRewardScreen',
+              builder: (context, params) => JoiningRewardScreenWidget(),
+            ),
+            FFRoute(
               name: 'MainScreen',
               path: 'mainScreen',
               builder: (context, params) => MainScreenWidget(),
@@ -130,6 +135,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => CheckinScreen2Widget(
                 outletName: params.getParam('outletName', ParamType.String),
               ),
+            ),
+            FFRoute(
+              name: 'ThankyouScreenCopy',
+              path: 'thankyouScreenCopy',
+              builder: (context, params) => ThankyouScreenCopyWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

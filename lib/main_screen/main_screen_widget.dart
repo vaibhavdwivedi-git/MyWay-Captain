@@ -1,10 +1,13 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -16,12 +19,29 @@ class MainScreenWidget extends StatefulWidget {
   _MainScreenWidgetState createState() => _MainScreenWidgetState();
 }
 
-class _MainScreenWidgetState extends State<MainScreenWidget> {
+class _MainScreenWidgetState extends State<MainScreenWidget>
+    with TickerProviderStateMixin {
+  final animationsMap = {
+    'containerOnPageLoadAnimation': AnimationInfo(
+      loop: true,
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ScaleEffect(
+          curve: Curves.linear,
+          delay: 0.ms,
+          duration: 800.ms,
+          begin: 1,
+          end: 0.9,
+        ),
+      ],
+    ),
+  };
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
+
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'MainScreen'});
   }
 
@@ -158,18 +178,18 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.2,
                                   decoration: BoxDecoration(
-                                    color: Color(0xFFF45D5C),
+                                    color: Color(0xFF75B9F2),
                                     borderRadius: BorderRadius.circular(24),
                                   ),
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        32, 16, 0, 0),
+                                        8, 16, 8, 8),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
                                       crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Padding(
                                           padding:
@@ -177,8 +197,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                                                   0, 0, 0, 16),
                                           child: Text(
                                             FFAppState().language == 'English'
-                                                ? 'Progress'
-                                                : 'प्रगति',
+                                                ? 'Next Reward'
+                                                : 'अगला इनाम ',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
@@ -191,33 +211,128 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                                                 ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 8),
-                                          child: Text(
-                                            '₹ ${mainScreenDriversRecord!.moneySpent?.toString()}',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily: 'Work Sans',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryBtnText,
-                                                  fontSize: 42,
-                                                  fontWeight: FontWeight.w500,
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            if (mainScreenDriversRecord!
+                                                    .moneySpent ==
+                                                100)
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 8, 0, 8),
+                                                child: InkWell(
+                                                  onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'MAIN_SCREEN_PAGE_Text_s2ii8kv4_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Text_alert_dialog');
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text(FFAppState()
+                                                                      .language ==
+                                                                  'English'
+                                                              ? 'Reward Information'
+                                                              : 'इनाम की जानकारी'),
+                                                          content: Text(FFAppState()
+                                                                      .language ==
+                                                                  'English'
+                                                              ? '₹100 will be credited to your account after 1st successful trip.'
+                                                              : 'पहली ट्रिप पूरी करने पर MyWay द्वारा आपको ₹100 दिए जाएंगे!'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext),
+                                                              child: Text(FFAppState()
+                                                                          .language ==
+                                                                      'English'
+                                                                  ? 'Continue'
+                                                                  : 'जारी रखें'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Text(
+                                                    '₹${mainScreenDriversRecord!.moneySpent?.toString()}',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Work Sans',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBtnText,
+                                                          fontSize: 42,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                  ),
                                                 ),
-                                          ),
-                                        ),
-                                        Text(
-                                          'in ${mainScreenDriversRecord!.trips?.toString()} trips.',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'Poppins',
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.normal,
                                               ),
+                                            if (mainScreenDriversRecord!
+                                                    .moneySpent ==
+                                                0)
+                                              InkWell(
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'MAIN_SCREEN_Container_ctrg7xw6_ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Container_alert_dialog');
+                                                  await showDialog(
+                                                    context: context,
+                                                    builder:
+                                                        (alertDialogContext) {
+                                                      return AlertDialog(
+                                                        title: Text(FFAppState()
+                                                                    .language ==
+                                                                'English'
+                                                            ? 'Reward Information'
+                                                            : 'इनाम की जानकारी'),
+                                                        content: Text(FFAppState()
+                                                                    .language ==
+                                                                'English'
+                                                            ? 'Next reward will unlock after 10 trips.'
+                                                            : '10 ट्रिप्स होने पर एक आकर्षक इनाम आपका इंतजार कर रहा है।'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () =>
+                                                                Navigator.pop(
+                                                                    alertDialogContext),
+                                                            child: Text(FFAppState()
+                                                                        .language ==
+                                                                    'English'
+                                                                ? 'Continue'
+                                                                : 'जारी रखें'),
+                                                          ),
+                                                        ],
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                                child: Container(
+                                                  width: 80,
+                                                  height: 80,
+                                                  decoration: BoxDecoration(
+                                                    color: Color(0x00FFFFFF),
+                                                    image: DecorationImage(
+                                                      fit: BoxFit.cover,
+                                                      image: Image.asset(
+                                                        'assets/images/gift-box.png',
+                                                      ).image,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ).animateOnPageLoad(animationsMap[
+                                                  'containerOnPageLoadAnimation']!),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -229,7 +344,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.2,
                                   decoration: BoxDecoration(
-                                    color: Color(0xFF75B9F2),
+                                    color: Color(0xFFF45D5C),
                                     borderRadius: BorderRadius.circular(32),
                                   ),
                                   child: Padding(
@@ -239,6 +354,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Padding(
                                           padding:
@@ -246,8 +363,8 @@ class _MainScreenWidgetState extends State<MainScreenWidget> {
                                                   0, 0, 0, 8),
                                           child: Text(
                                             FFAppState().language == 'English'
-                                                ? 'Reward Counter'
-                                                : 'इनाम काउंटर',
+                                                ? 'Bounty Tracker'
+                                                : 'इनाम ट्रैकर',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1
                                                 .override(
