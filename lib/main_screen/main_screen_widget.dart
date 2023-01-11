@@ -222,21 +222,59 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
                                               Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(0, 8, 0, 8),
-                                                child: Text(
-                                                  '₹${mainScreenDriversRecord!.moneySpent?.toString()}',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily: 'Work Sans',
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primaryBtnText,
-                                                        fontSize: 42,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
+                                                child: InkWell(
+                                                  onTap: () async {
+                                                    logFirebaseEvent(
+                                                        'MAIN_SCREEN_PAGE_Text_s2ii8kv4_ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Text_alert_dialog');
+                                                    await showDialog(
+                                                      context: context,
+                                                      builder:
+                                                          (alertDialogContext) {
+                                                        return AlertDialog(
+                                                          title: Text(FFAppState()
+                                                                      .language ==
+                                                                  'English'
+                                                              ? 'Reward Information'
+                                                              : 'इनाम की जानकारी'),
+                                                          content: Text(FFAppState()
+                                                                      .language ==
+                                                                  'English'
+                                                              ? '₹100 will be credited to your account after 1st successful trip.'
+                                                              : 'पहली ट्रिप पूरी करने पर MyWay द्वारा आपको ₹100 दिए जाएंगे!'),
+                                                          actions: [
+                                                            TextButton(
+                                                              onPressed: () =>
+                                                                  Navigator.pop(
+                                                                      alertDialogContext),
+                                                              child: Text(FFAppState()
+                                                                          .language ==
+                                                                      'English'
+                                                                  ? 'Continue'
+                                                                  : 'जारी रखें'),
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Text(
+                                                    '₹${mainScreenDriversRecord!.moneySpent?.toString()}',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'Work Sans',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryBtnText,
+                                                          fontSize: 42,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                  ),
                                                 ),
                                               ),
                                             if (mainScreenDriversRecord!
