@@ -109,7 +109,10 @@ class _LanguageScreenWidgetState extends State<LanguageScreenWidget>
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(24, 16, 24, 32),
                         child: FlutterFlowDropDown<String>(
-                          options: ['Hindi', 'English'],
+                          initialOption: dropDownValue ??=
+                              FFAppState().language,
+                          options: ['Option 1', ''],
+                          optionLabels: ['Hindi', 'English'],
                           onChanged: (val) =>
                               setState(() => dropDownValue = val),
                           width: double.infinity,

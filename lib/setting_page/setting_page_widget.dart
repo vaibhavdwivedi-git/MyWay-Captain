@@ -329,40 +329,45 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                         ),
                         Expanded(
                           flex: 1,
-                          child: InkWell(
-                            onTap: () async {
-                              logFirebaseEvent(
-                                  'SETTING_Container_hrscu69n_ON_TAP');
-                              logFirebaseEvent('Container_share');
-                              await Share.share(
-                                  'नमस्ते मित्र! मैं MyWay ढाबा से जुड़ चुका हूं,  तुम भी इससे जुड़ सकते हो, इस app ko install krne se।  https://play.google.com/store/apps/details?id=com.mywaydhaba.myway');
-                            },
-                            child: Container(
-                              width: 100,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF7ED6DC),
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(0),
-                                  bottomRight: Radius.circular(12),
-                                  topLeft: Radius.circular(0),
-                                  topRight: Radius.circular(12),
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Share',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Poppins',
-                                          color: Colors.white,
-                                        ),
+                          child: Builder(
+                            builder: (context) => InkWell(
+                              onTap: () async {
+                                logFirebaseEvent(
+                                    'SETTING_Container_hrscu69n_ON_TAP');
+                                logFirebaseEvent('Container_share');
+                                await Share.share(
+                                  'नमस्ते मित्र! मैं MyWay ढाबा से जुड़ चुका हूं,  तुम भी इससे जुड़ सकते हो, इस app ko install krne se।  https://play.google.com/store/apps/details?id=com.mywaydhaba.myway',
+                                  sharePositionOrigin:
+                                      getWidgetBoundingBox(context),
+                                );
+                              },
+                              child: Container(
+                                width: 100,
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF7ED6DC),
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(0),
+                                    bottomRight: Radius.circular(12),
+                                    topLeft: Radius.circular(0),
+                                    topRight: Radius.circular(12),
                                   ),
-                                ],
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'Share',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Poppins',
+                                            color: Colors.white,
+                                          ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
