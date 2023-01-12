@@ -372,7 +372,7 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
                                       color: Color(0xFFFFA2C0),
                                     ),
                                     direction: Axis.horizontal,
-                                    initialRating: ratingBarValue ??= 3,
+                                    initialRating: ratingBarValue ??= 5,
                                     unratedColor: Color(0xFFF2F7FA),
                                     itemCount: 5,
                                     itemSize: 32,
@@ -467,7 +467,15 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
                                                         final outletsUpdateData =
                                                             {
                                                           ...createOutletsRecordData(
-                                                            rating: 4,
+                                                            rating: ((checkinScreen2OutletsRecord!.rating! *
+                                                                            checkinScreen2OutletsRecord!
+                                                                                .visits! +
+                                                                        ratingBarValue!
+                                                                            .round()) /
+                                                                    (checkinScreen2OutletsRecord!
+                                                                            .visits! +
+                                                                        1))
+                                                                .toInt(),
                                                           ),
                                                           'Visits': FieldValue
                                                               .increment(1),
