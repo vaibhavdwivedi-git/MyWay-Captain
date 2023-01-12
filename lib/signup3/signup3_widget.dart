@@ -207,7 +207,6 @@ class _Signup3WidgetState extends State<Signup3Widget>
                               onPressed: () async {
                                 logFirebaseEvent(
                                     'SIGNUP3_PAGE_लॉग_इन_करें_BTN_ON_TAP');
-                                Function() _navigate = () {};
                                 logFirebaseEvent('Button_auth');
                                 GoRouter.of(context).prepareAuthEvent();
                                 final smsCodeVal = textController!.text;
@@ -228,8 +227,6 @@ class _Signup3WidgetState extends State<Signup3Widget>
                                   return;
                                 }
 
-                                _navigate = () =>
-                                    context.goNamedAuth('MainScreen', mounted);
                                 if ((buttonDriversRecord != null) == false) {
                                   logFirebaseEvent('Button_backend_call');
 
@@ -237,7 +234,7 @@ class _Signup3WidgetState extends State<Signup3Widget>
                                     ...createDriversRecordData(
                                       name: widget.name,
                                       displayPicture: '\"\"',
-                                      moneySpent: 0,
+                                      moneySpent: 100,
                                       trips: 0,
                                       mobileNumber: widget.mobile,
                                     ),
@@ -246,9 +243,15 @@ class _Signup3WidgetState extends State<Signup3Widget>
                                   await DriversRecord.collection
                                       .doc()
                                       .set(driversCreateData);
-                                }
+                                  logFirebaseEvent('Button_navigate_to');
 
-                                _navigate();
+                                  context.pushNamedAuth(
+                                      'JoiningRewardScreen', mounted);
+                                } else {
+                                  logFirebaseEvent('Button_navigate_to');
+
+                                  context.goNamedAuth('MainScreen', mounted);
+                                }
                               },
                               text: FFAppState().language == 'English'
                                   ? 'Login'
