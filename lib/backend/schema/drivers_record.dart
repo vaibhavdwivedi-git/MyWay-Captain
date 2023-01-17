@@ -22,11 +22,11 @@ abstract class DriversRecord
   @BuiltValueField(wireName: 'Trips')
   int? get trips;
 
-  @BuiltValueField(wireName: 'Bills')
-  BuiltList<String>? get bills;
-
   @BuiltValueField(wireName: 'MobileNumber')
   String? get mobileNumber;
+
+  @BuiltValueField(wireName: 'Reward')
+  int? get reward;
 
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
@@ -37,8 +37,8 @@ abstract class DriversRecord
     ..displayPicture = ''
     ..moneySpent = 0
     ..trips = 0
-    ..bills = ListBuilder()
-    ..mobileNumber = '';
+    ..mobileNumber = ''
+    ..reward = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Drivers');
@@ -67,6 +67,7 @@ Map<String, dynamic> createDriversRecordData({
   int? moneySpent,
   int? trips,
   String? mobileNumber,
+  int? reward,
 }) {
   final firestoreData = serializers.toFirestore(
     DriversRecord.serializer,
@@ -76,8 +77,8 @@ Map<String, dynamic> createDriversRecordData({
         ..displayPicture = displayPicture
         ..moneySpent = moneySpent
         ..trips = trips
-        ..bills = null
-        ..mobileNumber = mobileNumber,
+        ..mobileNumber = mobileNumber
+        ..reward = reward,
     ),
   );
 

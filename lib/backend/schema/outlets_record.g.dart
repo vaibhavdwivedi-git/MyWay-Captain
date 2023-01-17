@@ -66,6 +66,13 @@ class _$OutletsRecordSerializer implements StructuredSerializer<OutletsRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.contact;
+    if (value != null) {
+      result
+        ..add('Contact')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -117,6 +124,10 @@ class _$OutletsRecordSerializer implements StructuredSerializer<OutletsRecord> {
           result.displayPicture = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'Contact':
+          result.contact = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -146,6 +157,8 @@ class _$OutletsRecord extends OutletsRecord {
   @override
   final String? displayPicture;
   @override
+  final String? contact;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$OutletsRecord([void Function(OutletsRecordBuilder)? updates]) =>
@@ -159,6 +172,7 @@ class _$OutletsRecord extends OutletsRecord {
       this.revenue,
       this.visits,
       this.displayPicture,
+      this.contact,
       this.ffRef})
       : super._();
 
@@ -180,6 +194,7 @@ class _$OutletsRecord extends OutletsRecord {
         revenue == other.revenue &&
         visits == other.visits &&
         displayPicture == other.displayPicture &&
+        contact == other.contact &&
         ffRef == other.ffRef;
   }
 
@@ -190,12 +205,16 @@ class _$OutletsRecord extends OutletsRecord {
             $jc(
                 $jc(
                     $jc(
-                        $jc($jc($jc(0, address.hashCode), geoLocation.hashCode),
-                            name.hashCode),
-                        rating.hashCode),
-                    revenue.hashCode),
-                visits.hashCode),
-            displayPicture.hashCode),
+                        $jc(
+                            $jc(
+                                $jc($jc(0, address.hashCode),
+                                    geoLocation.hashCode),
+                                name.hashCode),
+                            rating.hashCode),
+                        revenue.hashCode),
+                    visits.hashCode),
+                displayPicture.hashCode),
+            contact.hashCode),
         ffRef.hashCode));
   }
 
@@ -209,6 +228,7 @@ class _$OutletsRecord extends OutletsRecord {
           ..add('revenue', revenue)
           ..add('visits', visits)
           ..add('displayPicture', displayPicture)
+          ..add('contact', contact)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -247,6 +267,10 @@ class OutletsRecordBuilder
   set displayPicture(String? displayPicture) =>
       _$this._displayPicture = displayPicture;
 
+  String? _contact;
+  String? get contact => _$this._contact;
+  set contact(String? contact) => _$this._contact = contact;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -265,6 +289,7 @@ class OutletsRecordBuilder
       _revenue = $v.revenue;
       _visits = $v.visits;
       _displayPicture = $v.displayPicture;
+      _contact = $v.contact;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -295,6 +320,7 @@ class OutletsRecordBuilder
             revenue: revenue,
             visits: visits,
             displayPicture: displayPicture,
+            contact: contact,
             ffRef: ffRef);
     replace(_$result);
     return _$result;

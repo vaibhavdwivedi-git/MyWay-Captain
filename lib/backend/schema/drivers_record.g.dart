@@ -46,20 +46,18 @@ class _$DriversRecordSerializer implements StructuredSerializer<DriversRecord> {
         ..add('Trips')
         ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
-    value = object.bills;
-    if (value != null) {
-      result
-        ..add('Bills')
-        ..add(serializers.serialize(value,
-            specifiedType:
-                const FullType(BuiltList, const [const FullType(String)])));
-    }
     value = object.mobileNumber;
     if (value != null) {
       result
         ..add('MobileNumber')
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
+    }
+    value = object.reward;
+    if (value != null) {
+      result
+        ..add('Reward')
+        ..add(serializers.serialize(value, specifiedType: const FullType(int)));
     }
     value = object.ffRef;
     if (value != null) {
@@ -100,15 +98,13 @@ class _$DriversRecordSerializer implements StructuredSerializer<DriversRecord> {
           result.trips = serializers.deserialize(value,
               specifiedType: const FullType(int)) as int?;
           break;
-        case 'Bills':
-          result.bills.replace(serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      BuiltList, const [const FullType(String)]))!
-              as BuiltList<Object?>);
-          break;
         case 'MobileNumber':
           result.mobileNumber = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
+          break;
+        case 'Reward':
+          result.reward = serializers.deserialize(value,
+              specifiedType: const FullType(int)) as int?;
           break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
@@ -133,9 +129,9 @@ class _$DriversRecord extends DriversRecord {
   @override
   final int? trips;
   @override
-  final BuiltList<String>? bills;
-  @override
   final String? mobileNumber;
+  @override
+  final int? reward;
   @override
   final DocumentReference<Object?>? ffRef;
 
@@ -147,8 +143,8 @@ class _$DriversRecord extends DriversRecord {
       this.displayPicture,
       this.moneySpent,
       this.trips,
-      this.bills,
       this.mobileNumber,
+      this.reward,
       this.ffRef})
       : super._();
 
@@ -167,8 +163,8 @@ class _$DriversRecord extends DriversRecord {
         displayPicture == other.displayPicture &&
         moneySpent == other.moneySpent &&
         trips == other.trips &&
-        bills == other.bills &&
         mobileNumber == other.mobileNumber &&
+        reward == other.reward &&
         ffRef == other.ffRef;
   }
 
@@ -181,8 +177,8 @@ class _$DriversRecord extends DriversRecord {
                     $jc($jc($jc(0, name.hashCode), displayPicture.hashCode),
                         moneySpent.hashCode),
                     trips.hashCode),
-                bills.hashCode),
-            mobileNumber.hashCode),
+                mobileNumber.hashCode),
+            reward.hashCode),
         ffRef.hashCode));
   }
 
@@ -193,8 +189,8 @@ class _$DriversRecord extends DriversRecord {
           ..add('displayPicture', displayPicture)
           ..add('moneySpent', moneySpent)
           ..add('trips', trips)
-          ..add('bills', bills)
           ..add('mobileNumber', mobileNumber)
+          ..add('reward', reward)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -221,13 +217,13 @@ class DriversRecordBuilder
   int? get trips => _$this._trips;
   set trips(int? trips) => _$this._trips = trips;
 
-  ListBuilder<String>? _bills;
-  ListBuilder<String> get bills => _$this._bills ??= new ListBuilder<String>();
-  set bills(ListBuilder<String>? bills) => _$this._bills = bills;
-
   String? _mobileNumber;
   String? get mobileNumber => _$this._mobileNumber;
   set mobileNumber(String? mobileNumber) => _$this._mobileNumber = mobileNumber;
+
+  int? _reward;
+  int? get reward => _$this._reward;
+  set reward(int? reward) => _$this._reward = reward;
 
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
@@ -244,8 +240,8 @@ class DriversRecordBuilder
       _displayPicture = $v.displayPicture;
       _moneySpent = $v.moneySpent;
       _trips = $v.trips;
-      _bills = $v.bills?.toBuilder();
       _mobileNumber = $v.mobileNumber;
+      _reward = $v.reward;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -267,28 +263,15 @@ class DriversRecordBuilder
   DriversRecord build() => _build();
 
   _$DriversRecord _build() {
-    _$DriversRecord _$result;
-    try {
-      _$result = _$v ??
-          new _$DriversRecord._(
-              name: name,
-              displayPicture: displayPicture,
-              moneySpent: moneySpent,
-              trips: trips,
-              bills: _bills?.build(),
-              mobileNumber: mobileNumber,
-              ffRef: ffRef);
-    } catch (_) {
-      late String _$failedField;
-      try {
-        _$failedField = 'bills';
-        _bills?.build();
-      } catch (e) {
-        throw new BuiltValueNestedFieldError(
-            r'DriversRecord', _$failedField, e.toString());
-      }
-      rethrow;
-    }
+    final _$result = _$v ??
+        new _$DriversRecord._(
+            name: name,
+            displayPicture: displayPicture,
+            moneySpent: moneySpent,
+            trips: trips,
+            mobileNumber: mobileNumber,
+            reward: reward,
+            ffRef: ffRef);
     replace(_$result);
     return _$result;
   }
