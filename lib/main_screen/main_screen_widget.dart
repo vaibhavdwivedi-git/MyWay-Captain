@@ -217,7 +217,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
                                               MainAxisAlignment.center,
                                           children: [
                                             if (mainScreenDriversRecord!
-                                                    .moneySpent ==
+                                                    .reward ==
                                                 100)
                                               Padding(
                                                 padding: EdgeInsetsDirectional
@@ -260,7 +260,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
                                                     );
                                                   },
                                                   child: Text(
-                                                    '₹${mainScreenDriversRecord!.moneySpent?.toString()}',
+                                                    '₹${mainScreenDriversRecord!.reward?.toString()}',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText1
@@ -278,7 +278,7 @@ class _MainScreenWidgetState extends State<MainScreenWidget>
                                                 ),
                                               ),
                                             if (mainScreenDriversRecord!
-                                                    .moneySpent ==
+                                                    .reward ==
                                                 0)
                                               InkWell(
                                                 onTap: () async {

@@ -230,16 +230,15 @@ class _Signup3WidgetState extends State<Signup3Widget>
                                 if ((buttonDriversRecord != null) == false) {
                                   logFirebaseEvent('Button_backend_call');
 
-                                  final driversCreateData = {
-                                    ...createDriversRecordData(
-                                      name: widget.name,
-                                      displayPicture: '\"\"',
-                                      moneySpent: 100,
-                                      trips: 0,
-                                      mobileNumber: widget.mobile,
-                                    ),
-                                    'Bills': ['[]'],
-                                  };
+                                  final driversCreateData =
+                                      createDriversRecordData(
+                                    name: widget.name,
+                                    displayPicture: '\"\"',
+                                    moneySpent: 0,
+                                    trips: 0,
+                                    mobileNumber: widget.mobile,
+                                    reward: 100,
+                                  );
                                   await DriversRecord.collection
                                       .doc()
                                       .set(driversCreateData);

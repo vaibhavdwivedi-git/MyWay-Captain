@@ -376,6 +376,50 @@ class _SettingPageWidgetState extends State<SettingPageWidget> {
                     ),
                   ),
                   Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(32, 36, 32, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          'Contact us ',
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'Work Sans',
+                                    color: Color(0xFF303030),
+                                    fontSize: 20,
+                                  ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(32, 24, 32, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.phone,
+                          color: Colors.black,
+                          size: 16,
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(8, 0, 0, 0),
+                          child: Text(
+                            '+91 6350317505',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'Work Sans',
+                                      color: Color(0xFF303030),
+                                      fontSize: 16,
+                                    ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(32, 64, 32, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,

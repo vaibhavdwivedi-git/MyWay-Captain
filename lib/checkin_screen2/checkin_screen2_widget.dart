@@ -455,6 +455,12 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
                                                               buttonDriversRecord!
                                                                   .name,
                                                           verified: false,
+                                                          bill: 0,
+                                                          photo: '',
+                                                          approval: 'Pending',
+                                                          driverContact:
+                                                              buttonDriversRecord!
+                                                                  .mobileNumber,
                                                         );
                                                         await TransactionsRecord
                                                             .collection
@@ -465,21 +471,18 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
                                                             'Button_backend_call');
 
                                                         final outletsUpdateData =
-                                                            {
-                                                          ...createOutletsRecordData(
-                                                            rating: ((checkinScreen2OutletsRecord!.rating! *
-                                                                            checkinScreen2OutletsRecord!
-                                                                                .visits! +
-                                                                        ratingBarValue!
-                                                                            .round()) /
-                                                                    (checkinScreen2OutletsRecord!
-                                                                            .visits! +
-                                                                        1))
-                                                                .toInt(),
-                                                          ),
-                                                          'Visits': FieldValue
-                                                              .increment(1),
-                                                        };
+                                                            createOutletsRecordData(
+                                                          rating: ((checkinScreen2OutletsRecord!
+                                                                              .rating! *
+                                                                          checkinScreen2OutletsRecord!
+                                                                              .visits! +
+                                                                      ratingBarValue!
+                                                                          .round()) /
+                                                                  (checkinScreen2OutletsRecord!
+                                                                          .visits! +
+                                                                      1))
+                                                              .toInt(),
+                                                        );
                                                         await checkinScreen2OutletsRecord!
                                                             .reference
                                                             .update(
@@ -501,19 +504,6 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
                                                             ),
                                                           },
                                                         );
-
-                                                        logFirebaseEvent(
-                                                            'Button_backend_call');
-
-                                                        final driversUpdateData =
-                                                            {
-                                                          'Trips': FieldValue
-                                                              .increment(1),
-                                                        };
-                                                        await buttonDriversRecord!
-                                                            .reference
-                                                            .update(
-                                                                driversUpdateData);
                                                       },
                                                 text: FFAppState().language ==
                                                         'English'
