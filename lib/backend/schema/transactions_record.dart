@@ -29,6 +29,12 @@ abstract class TransactionsRecord
   @BuiltValueField(wireName: 'Verified')
   bool? get verified;
 
+  @BuiltValueField(wireName: 'Approval')
+  String? get approval;
+
+  @BuiltValueField(wireName: 'DriverContact')
+  String? get driverContact;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -38,7 +44,9 @@ abstract class TransactionsRecord
     ..driver = ''
     ..outlet = ''
     ..photo = ''
-    ..verified = false;
+    ..verified = false
+    ..approval = ''
+    ..driverContact = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Transactions');
@@ -69,6 +77,8 @@ Map<String, dynamic> createTransactionsRecordData({
   String? outlet,
   String? photo,
   bool? verified,
+  String? approval,
+  String? driverContact,
 }) {
   final firestoreData = serializers.toFirestore(
     TransactionsRecord.serializer,
@@ -79,7 +89,9 @@ Map<String, dynamic> createTransactionsRecordData({
         ..driver = driver
         ..outlet = outlet
         ..photo = photo
-        ..verified = verified,
+        ..verified = verified
+        ..approval = approval
+        ..driverContact = driverContact,
     ),
   );
 

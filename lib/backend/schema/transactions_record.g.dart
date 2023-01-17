@@ -63,6 +63,20 @@ class _$TransactionsRecordSerializer
         ..add(
             serializers.serialize(value, specifiedType: const FullType(bool)));
     }
+    value = object.approval;
+    if (value != null) {
+      result
+        ..add('Approval')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.driverContact;
+    if (value != null) {
+      result
+        ..add('DriverContact')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -110,6 +124,14 @@ class _$TransactionsRecordSerializer
           result.verified = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool?;
           break;
+        case 'Approval':
+          result.approval = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
+        case 'DriverContact':
+          result.driverContact = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -137,6 +159,10 @@ class _$TransactionsRecord extends TransactionsRecord {
   @override
   final bool? verified;
   @override
+  final String? approval;
+  @override
+  final String? driverContact;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$TransactionsRecord(
@@ -150,6 +176,8 @@ class _$TransactionsRecord extends TransactionsRecord {
       this.outlet,
       this.photo,
       this.verified,
+      this.approval,
+      this.driverContact,
       this.ffRef})
       : super._();
 
@@ -172,6 +200,8 @@ class _$TransactionsRecord extends TransactionsRecord {
         outlet == other.outlet &&
         photo == other.photo &&
         verified == other.verified &&
+        approval == other.approval &&
+        driverContact == other.driverContact &&
         ffRef == other.ffRef;
   }
 
@@ -181,11 +211,15 @@ class _$TransactionsRecord extends TransactionsRecord {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, bill.hashCode), date.hashCode),
-                        driver.hashCode),
-                    outlet.hashCode),
-                photo.hashCode),
-            verified.hashCode),
+                    $jc(
+                        $jc(
+                            $jc($jc($jc(0, bill.hashCode), date.hashCode),
+                                driver.hashCode),
+                            outlet.hashCode),
+                        photo.hashCode),
+                    verified.hashCode),
+                approval.hashCode),
+            driverContact.hashCode),
         ffRef.hashCode));
   }
 
@@ -198,6 +232,8 @@ class _$TransactionsRecord extends TransactionsRecord {
           ..add('outlet', outlet)
           ..add('photo', photo)
           ..add('verified', verified)
+          ..add('approval', approval)
+          ..add('driverContact', driverContact)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -231,6 +267,15 @@ class TransactionsRecordBuilder
   bool? get verified => _$this._verified;
   set verified(bool? verified) => _$this._verified = verified;
 
+  String? _approval;
+  String? get approval => _$this._approval;
+  set approval(String? approval) => _$this._approval = approval;
+
+  String? _driverContact;
+  String? get driverContact => _$this._driverContact;
+  set driverContact(String? driverContact) =>
+      _$this._driverContact = driverContact;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -248,6 +293,8 @@ class TransactionsRecordBuilder
       _outlet = $v.outlet;
       _photo = $v.photo;
       _verified = $v.verified;
+      _approval = $v.approval;
+      _driverContact = $v.driverContact;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -277,6 +324,8 @@ class TransactionsRecordBuilder
             outlet: outlet,
             photo: photo,
             verified: verified,
+            approval: approval,
+            driverContact: driverContact,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
