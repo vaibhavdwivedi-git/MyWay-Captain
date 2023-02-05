@@ -72,7 +72,7 @@ void triggerPushNotification({
       'notification_image_url': notificationImageUrl,
     if (scheduledTime != null) 'scheduled_time': scheduledTime,
     if (notificationSound != null) 'notification_sound': notificationSound,
-    'user_refs': "outlets_users/vZC0GXWLt8Q4EG5s3TpyJBfHFBY2",
+    'user_refs': userRefs.map((u) => u.path).join(','),
     'initial_page_name': initialPageName,
     'parameter_data': serializedParameterData,
     'sender': currentUserReference,

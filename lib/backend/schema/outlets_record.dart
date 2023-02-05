@@ -34,6 +34,9 @@ abstract class OutletsRecord
   @BuiltValueField(wireName: 'Contact')
   String? get contact;
 
+  @BuiltValueField(wireName: 'Notification')
+  String? get notification;
+
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference? get ffRef;
   DocumentReference get reference => ffRef!;
@@ -45,7 +48,8 @@ abstract class OutletsRecord
     ..revenue = 0
     ..visits = 0
     ..displayPicture = ''
-    ..contact = '';
+    ..contact = ''
+    ..notification = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Outlets');
@@ -77,6 +81,7 @@ Map<String, dynamic> createOutletsRecordData({
   int? visits,
   String? displayPicture,
   String? contact,
+  String? notification,
 }) {
   final firestoreData = serializers.toFirestore(
     OutletsRecord.serializer,
@@ -89,7 +94,8 @@ Map<String, dynamic> createOutletsRecordData({
         ..revenue = revenue
         ..visits = visits
         ..displayPicture = displayPicture
-        ..contact = contact,
+        ..contact = contact
+        ..notification = notification,
     ),
   );
 
