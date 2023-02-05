@@ -57,7 +57,7 @@ void triggerPushNotification({
   String? notificationImageUrl,
   DateTime? scheduledTime,
   String? notificationSound,
-  required List<DocumentReference> userRefs,
+  required String userRef,
   required String initialPageName,
   required Map<String, dynamic> parameterData,
 }) {
@@ -72,7 +72,7 @@ void triggerPushNotification({
       'notification_image_url': notificationImageUrl,
     if (scheduledTime != null) 'scheduled_time': scheduledTime,
     if (notificationSound != null) 'notification_sound': notificationSound,
-    'user_refs': userRefs.map((u) => u.path).join(','),
+    'user_refs': userRef,
     'initial_page_name': initialPageName,
     'parameter_data': serializedParameterData,
     'sender': currentUserReference,
