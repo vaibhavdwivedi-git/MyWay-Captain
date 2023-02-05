@@ -512,7 +512,11 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
                                                           notificationTitle:
                                                               'Approval Pending ',
                                                           notificationText:
+
                                                               '${buttonDriversRecord!.name} has marked his entry',
+
+                                                              
+
                                                           userRef: checkinScreen2OutletsRecord!.notification,
                                                           initialPageName:
                                                               'MainScreen',
