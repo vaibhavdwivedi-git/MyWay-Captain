@@ -57,7 +57,7 @@ void triggerPushNotification({
   String? notificationImageUrl,
   DateTime? scheduledTime,
   String? notificationSound,
-  String userRef,
+  String? userRef,
   required String initialPageName,
   required Map<String, dynamic> parameterData,
 }) {
