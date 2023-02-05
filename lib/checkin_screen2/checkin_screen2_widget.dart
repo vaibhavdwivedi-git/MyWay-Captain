@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../backend/push_notifications/push_notifications_util.dart';
 import '../flutter_flow/flutter_flow_animations.dart';
 import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -503,6 +504,21 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
                                                                       .bottomToTop,
                                                             ),
                                                           },
+                                                        );
+
+                                                        logFirebaseEvent(
+                                                            'Button_trigger_push_notification');
+                                                        triggerPushNotification(
+                                                          notificationTitle:
+                                                              'Visited',
+                                                          notificationText:
+                                                              'Done visit!!',
+                                                          userRefs: [
+                                                            currentUserReference!
+                                                          ],
+                                                          initialPageName:
+                                                              'MainScreen',
+                                                          parameterData: {},
                                                         );
                                                       },
                                                 text: FFAppState().language ==
