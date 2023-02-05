@@ -513,9 +513,7 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
                                                               'Visited',
                                                           notificationText:
                                                               'Done visit!!',
-                                                          userRefs: [
-                                                            currentUserReference!
-                                                          ],
+                                                          userRef: checkinScreen2OutletsRecord!.notification,
                                                           initialPageName:
                                                               'MainScreen',
                                                           parameterData: {},
