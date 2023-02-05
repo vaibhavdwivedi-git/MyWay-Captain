@@ -73,6 +73,13 @@ class _$OutletsRecordSerializer implements StructuredSerializer<OutletsRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(String)));
     }
+    value = object.notification;
+    if (value != null) {
+      result
+        ..add('Notification')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.ffRef;
     if (value != null) {
       result
@@ -128,6 +135,10 @@ class _$OutletsRecordSerializer implements StructuredSerializer<OutletsRecord> {
           result.contact = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String?;
           break;
+        case 'Notification':
+          result.notification = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String?;
+          break;
         case 'Document__Reference__Field':
           result.ffRef = serializers.deserialize(value,
               specifiedType: const FullType(DocumentReference, const [
@@ -159,6 +170,8 @@ class _$OutletsRecord extends OutletsRecord {
   @override
   final String? contact;
   @override
+  final String? notification;
+  @override
   final DocumentReference<Object?>? ffRef;
 
   factory _$OutletsRecord([void Function(OutletsRecordBuilder)? updates]) =>
@@ -173,6 +186,7 @@ class _$OutletsRecord extends OutletsRecord {
       this.visits,
       this.displayPicture,
       this.contact,
+      this.notification,
       this.ffRef})
       : super._();
 
@@ -195,6 +209,7 @@ class _$OutletsRecord extends OutletsRecord {
         visits == other.visits &&
         displayPicture == other.displayPicture &&
         contact == other.contact &&
+        notification == other.notification &&
         ffRef == other.ffRef;
   }
 
@@ -207,14 +222,16 @@ class _$OutletsRecord extends OutletsRecord {
                     $jc(
                         $jc(
                             $jc(
-                                $jc($jc(0, address.hashCode),
-                                    geoLocation.hashCode),
-                                name.hashCode),
-                            rating.hashCode),
-                        revenue.hashCode),
-                    visits.hashCode),
-                displayPicture.hashCode),
-            contact.hashCode),
+                                $jc(
+                                    $jc($jc(0, address.hashCode),
+                                        geoLocation.hashCode),
+                                    name.hashCode),
+                                rating.hashCode),
+                            revenue.hashCode),
+                        visits.hashCode),
+                    displayPicture.hashCode),
+                contact.hashCode),
+            notification.hashCode),
         ffRef.hashCode));
   }
 
@@ -229,6 +246,7 @@ class _$OutletsRecord extends OutletsRecord {
           ..add('visits', visits)
           ..add('displayPicture', displayPicture)
           ..add('contact', contact)
+          ..add('notification', notification)
           ..add('ffRef', ffRef))
         .toString();
   }
@@ -271,6 +289,10 @@ class OutletsRecordBuilder
   String? get contact => _$this._contact;
   set contact(String? contact) => _$this._contact = contact;
 
+  String? _notification;
+  String? get notification => _$this._notification;
+  set notification(String? notification) => _$this._notification = notification;
+
   DocumentReference<Object?>? _ffRef;
   DocumentReference<Object?>? get ffRef => _$this._ffRef;
   set ffRef(DocumentReference<Object?>? ffRef) => _$this._ffRef = ffRef;
@@ -290,6 +312,7 @@ class OutletsRecordBuilder
       _visits = $v.visits;
       _displayPicture = $v.displayPicture;
       _contact = $v.contact;
+      _notification = $v.notification;
       _ffRef = $v.ffRef;
       _$v = null;
     }
@@ -321,6 +344,7 @@ class OutletsRecordBuilder
             visits: visits,
             displayPicture: displayPicture,
             contact: contact,
+            notification: notification,
             ffRef: ffRef);
     replace(_$result);
     return _$result;
