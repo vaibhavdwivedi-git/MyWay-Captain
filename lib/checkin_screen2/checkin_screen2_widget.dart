@@ -510,9 +510,9 @@ class _CheckinScreen2WidgetState extends State<CheckinScreen2Widget>
                                                             'Button_trigger_push_notification');
                                                         triggerPushNotification(
                                                           notificationTitle:
-                                                              'Visited',
+                                                              'Approval Pending ',
                                                           notificationText:
-                                                              'Done visit!!',
+                                                              '${buttonDriversRecord!.name} has marked his entry',
                                                           userRefs: [
                                                             currentUserReference!
                                                           ],
